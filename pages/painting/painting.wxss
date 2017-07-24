@@ -1,6 +1,10 @@
 /* painting.wxss */
+page {
+  background: rgba(153, 204, 255, 0.3);
+}
+
 canvas {
-  height: calc(100vh - 50px);
+  height: 60vh;
   width: 100vw;
 }
 

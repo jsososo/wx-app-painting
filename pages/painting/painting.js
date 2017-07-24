@@ -9,19 +9,19 @@ Page({
     btnInfo: [
       {
         type: 'width',
-        background: 'url("../src/img/bg1.jpg"); background-size: 30px 30px;'
+        background: 'url("http://cdn3.freepik.com/image/th/318-28305.jpg"); background-size: 30px 30px;'
       },
       {
         type: 'color',
-        background: 'url("../src/img/bg2.jpg") white no-repeat; background-size: 24px 24px;background-position: 3px 3px;'
+        background: 'url("http://img2.web07.cn/UpPic/Png/201411/19/334374191221572.png") white no-repeat; background-size: 24px 24px;background-position: 3px 3px;'
       },
       {
         type: 'clear',
-        background: 'url("../src/img/bg3.jpg") white no-repeat; background-size: 20px 20px;background-position: 5px 5px;'
+        background: 'url("http://img0.imgtn.bdimg.com/it/u=1358545290,3102156418&fm=26&gp=0.jpg") white no-repeat; background-size: 20px 20px;background-position: 5px 5px;'
       },
       {
         type: 'save',
-        background: 'url("../src/img/bg6.png") white no-repeat; background-size: 20px 20px;background-position: 5px 5px;'
+        background: 'url("http://msqq.com/d/file/icon/2014-04-12/a8b06d02b0eeac79c5e150fb24c6b1fc.png") white no-repeat; background-size: 20px 20px;background-position: 5px 5px;'
       }
     ],
     width: false,
@@ -38,7 +38,11 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    let ctx = wx.createCanvasContext('myCanvas');
+    ctx.rect(0, 0, 500, 800);
+    ctx.setFillStyle('white');
+    ctx.fill();
+    ctx.draw();
   },
 
   touchStart: function (e) {
@@ -96,8 +100,8 @@ Page({
         success: function (res) {
           wx.saveImageToPhotosAlbum({
             filePath: res.tempFilePath,
-            success: function (res) {
-              console.log(res)
+            success: function (r) {
+              console.log(r)
             }
           })
         }
@@ -129,6 +133,9 @@ Page({
 
   clearCanvas: function () {
     let ctx = wx.createCanvasContext('myCanvas');
+    ctx.rect(0, 0, 500, 800);
+    ctx.setFillStyle('white');
+    ctx.fill();
     ctx.draw();
   },
 
