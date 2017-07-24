@@ -1,5 +1,5 @@
 <!--painting.wxml-->
-<canvas canvas-id="myCanvas" bindtouchstart="touchStart" bindtouchmove="touchMove"/>
+<canvas canvas-id="myCanvas" disable-scroll="true" bindtouchend="toucheEnd" bindtouchstart="touchStart" bindtouchmove="touchMove"/>
 <view class="bottom">
   <block wx:for="{{btnInfo}}" wx:key="{{index}}">
     <view class="list-item" data-type="{{item.type}}" style="background: {{item.background}}" bindtap="tapBtn"></view>

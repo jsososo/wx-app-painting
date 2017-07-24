@@ -73,6 +73,10 @@ Page({
     })
   },
 
+  touchEnd: function (e) {
+    
+  },
+
   tapBtn: function (e) {
     let btnType = e.target.dataset.type;
 
