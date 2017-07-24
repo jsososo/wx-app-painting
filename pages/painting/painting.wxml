@@ -7,7 +7,7 @@
 </view>
 <view class="choose-box" wx:if="{{width}}">
 <view class="color-box" style="background: {{'rgb(' + r + ', ' + g + ', ' + b + ')'}}; height: {{w}}px; border-radius: {{w/2}}px"></view>
-  <slider min="1" max="100" step="1" show-value="true" value="{{w}}" bindchange="changeWidth"/>
+  <slider min="1" max="50" step="1" show-value="true" value="{{w}}" bindchange="changeWidth"/>
 </view>
 <view class="choose-box" wx:if="{{color}}">
   <view class="color-box" style="background: {{'rgb(' + r + ', ' + g + ', ' + b + ')'}}; height: {{w}}px; border-radius: {{w/2}}px"></view>
