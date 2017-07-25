@@ -50,7 +50,7 @@ Page({
         that.setData({
           canvasWidth: res.windowWidth,
           canvasHeight: res.windowHeight - 50,
-          windowHeight: res.windowHeight - 50
+          windowHeight: res.windowHeight
         })
       },
     })
@@ -93,13 +93,13 @@ Page({
       this.setData({
         width: !this.data.width,
         color: false,
-        canvasHeightLen: (!this.data.width) ? Math.min(this.data.canvasHeight, this.data.windowHeight - this.data.w - 80) : 0,
+        canvasHeightLen: (!this.data.width) ? Math.min(this.data.canvasHeight, this.data.windowHeight - this.data.w - 130) : 0,
       })
     } else if (btnType == 'color') {
       this.setData({
         width: false,
         color: !this.data.color,
-        canvasHeightLen: (!this.data.color) ? Math.min(this.data.canvasHeight, this.data.windowHeight - this.data.w - 155) : 0,
+        canvasHeightLen: (!this.data.color) ? Math.min(this.data.canvasHeight, this.data.windowHeight - this.data.w - 205) : 0,
       })
     } else if (btnType == 'back') {
       this.setData({
@@ -129,15 +129,23 @@ Page({
   },
 
   touchStart: function (e) {
+
     this.setData({
-      prevPosition: [e.touches[0].x, e.touches[0].y]
+      prevPosition: [e.touches[0].x, e.touches[0].y],
+      width: false,
+      color: false,
+      canvasHeightLen: 0
     })
 
     let that = this;
 
     wx.canvasToTempFilePath({
       canvasId: 'myCanvas',
-      success: function(res) {
+      width: that.data.canvasWidth,
+      height: that.data.canvasHeight,
+      destHeight: that.data.canvasHeight,
+      destWidth: that.data.canvasWidth,
+      success: function (res) {
         let src = that.data.storeSrc;
         src.push(res.tempFilePath);
 
@@ -168,10 +176,12 @@ Page({
   backLast: function () {
     let [ctx, storeSrc] = [wx.createCanvasContext('myCanvas'), this.data.storeSrc];
 
-    let src = storeSrc.pop();
+    if (storeSrc.length > 0) {
+      let src = storeSrc.pop();
 
-    ctx.drawImage(src, 0, 0, this.data.canvasWidth, this.data.canvasHeight);
-    ctx.draw();
+      ctx.drawImage(src, 0, 0);
+      ctx.draw();
+    }
   },
 
   changeColor: function (e) {
