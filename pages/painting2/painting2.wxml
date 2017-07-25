@@ -1,5 +1,9 @@
-<!--painting.wxml-->
-<canvas canvas-id="myCanvas" style="height: calc(100vh - {{canvasHeight}}px)" disable-scroll="true" bindtouchend="toucheEnd" bindtouchstart="touchStart" bindtouchmove="touchMove"/>
+<!--painting-2.wxml-->
+<canvas canvas-id="myCanvas" disable-scroll="true" bindtouchstart="touchStart"
+  bindtouchmove="touchMove" bindtouchend="touchEnd" wx:if="{{hasChoosedImg}}"
+  style="height: {{(canvasHeightLen == 0) ? canvasHeight : canvasHeightLen}}px; width: {{canvasWidth}}px;" 
+/>
+<view class="failText" wx:if="{{!hasChoosedImg}}" click="">没有选择照片，点击重新选择</view>
 <view class="bottom">
   <block wx:for="{{btnInfo}}" wx:key="{{index}}">
     <view class="list-item" data-type="{{item.type}}" style="background: {{item.background}}" bindtap="tapBtn"></view>
@@ -14,14 +18,4 @@
   <slider min="0" max="255" step="1" show-value="true" activeColor="red" value="{{r}}" data-color="r" bindchange="changeColor"/>
   <slider min="0" max="255" step="1" show-value="true" activeColor="green" value="{{g}}" data-color="g" bindchange="changeColor"/>
   <slider min="0" max="255" step="1" show-value="true" activeColor="blue" value="{{b}}" data-color="b" bindchange="changeColor"/>
-</view>
-<view class="choose-box-flex" wx:if="{{clear}}">
-  <view class="choose-item" bindtap="chooseEraser">
-    <view class="choose-img" style='background: url("http://pic.58pic.com/get/00/06/97/6558PIC87.jpg") white no-repeat; background-size: 26px 26px;background-position: 2px 2px; border: {{eraser ? "2px solid #888" : "2px solid transparent"}}'></view>
-    <view>橡皮擦</view>
-  </view>
-  <view class="choose-item" bindtap="clearCanvas">
-    <view class="choose-img" style='background: url("http://cdns2.freepik.com/free-photo/trash-can-with-cover_318-59905.jpg") white no-repeat; background-size: 26px 26px;background-position: 2px 2px;'></view>
-    <view>清空</view>
-  </view>
 </view>

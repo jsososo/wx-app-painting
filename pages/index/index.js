@@ -3,15 +3,22 @@
 var app = getApp()
 Page({
   data: {
-    motto: 'Hello World',
-    userInfo: {}
+    
   },
-  //事件处理函数
-  bindViewTap: function() {
+
+  toPainting: function () {
     wx.navigateTo({
-      url: '../painting/painting'
+      url: '../painting/painting',
     })
   },
+
+  toPainting2: function () {
+    wx.navigateTo({
+      url: '../painting2/painting2',
+    })
+  },
+
+  //事件处理函数
   onLoad: function () {
     console.log('onLoad')
     var that = this
@@ -22,8 +29,8 @@ Page({
         userInfo:userInfo
       })
     })
-    wx.redirectTo({
-      url: '../painting/painting',
-    })
+    // wx.navigateTo({
+    //   url: '../painting2/painting2',
+    // })
   }
 })

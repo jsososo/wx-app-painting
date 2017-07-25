@@ -1,10 +1,12 @@
-/* painting.wxss */
+/* painting-2.wxss */
 page {
   background: rgba(153, 204, 255, 0.1);
 }
 
-canvas {
-  width: 100vw;
+.failText {
+  margin-top: 100px;
+  text-align: center;
+  color: #888;
 }
 
 .bottom {

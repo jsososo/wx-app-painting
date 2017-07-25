@@ -31,7 +31,8 @@ Page({
     g: 33,
     b: 33,
     w: 2,
-    eraser: false
+    eraser: false,
+    canvasHeight: 50
   },
 
   /**
@@ -84,21 +85,30 @@ Page({
       this.setData({
         width: !this.data.width,
         color: false,
-        clear: false
+        clear: false,
+        canvasHeight: (!this.data.width) ? 130 : 50
       })
     } else if (btnType == 'color') {
       this.setData({
         width: false,
         color: !this.data.color,
-        clear: false
+        clear: false,
+        canvasHeight: (!this.data.color) ? 205 + this.data.w : 50
       })
     } else if (btnType == 'clear') {
       this.setData({
         width: false,
         color: false,
-        clear: !this.data.clear
+        clear: !this.data.clear,
+        canvasHeight: (!this.data.clear) ? 120 + this.data.w : 50
       })
     } else if (btnType == 'save') {
+      this.setData({
+        width: false,
+        color: false,
+        clear: false,
+        canvasHeight: 50
+      })
       wx.canvasToTempFilePath({
         canvasId: 'myCanvas',
         success: function (res) {
@@ -141,11 +151,17 @@ Page({
     ctx.setFillStyle('white');
     ctx.fill();
     ctx.draw();
+    this.setData({
+      clear: false,
+      canvasHeight: 50
+    })
   },
 
   chooseEraser: function () {
     this.setData({
-      eraser: !this.data.eraser
+      eraser: !this.data.eraser,
+      clear: false,
+      canvasHeight: 50
     })
   },
 
