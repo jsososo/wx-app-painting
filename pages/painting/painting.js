@@ -86,7 +86,7 @@ Page({
         width: !this.data.width,
         color: false,
         clear: false,
-        canvasHeight: (!this.data.width) ? 130 : 50
+        canvasHeight: (!this.data.width) ? 130 + this.data.w : 50
       })
     } else if (btnType == 'color') {
       this.setData({
@@ -126,24 +126,27 @@ Page({
   changeColor: function (e) {
     if (e.target.dataset.color == 'r') {
       this.setData({
-        r: e.detail.value
+        r: e.detail.value,
+        eraser: false,
       })
     } else if (e.target.dataset.color == 'g') {
       this.setData({
-        g: e.detail.value
+        g: e.detail.value,
+        eraser: false,
       })
     } else if (e.target.dataset.color == 'b') {
       this.setData({
-        b: e.detail.value
+        b: e.detail.value,
+        eraser: false,
       })
     }
   },
 
   changeWidth: function (e) {
-    let w = this.data.w;
     this.setData({
       w: e.detail.value,
-      canvasHeight: this.data.canvasHeight - w + e.detail.value
+      canvasHeight: 130 + e.detail.value,
+      eraser: false,
     })
   },
 

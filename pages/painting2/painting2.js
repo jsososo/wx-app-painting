@@ -195,15 +195,18 @@ Page({
   changeColor: function (e) {
     if (e.target.dataset.color == 'r') {
       this.setData({
-        r: e.detail.value
+        r: e.detail.value,
+        eraser: false,
       })
     } else if (e.target.dataset.color == 'g') {
       this.setData({
-        g: e.detail.value
+        g: e.detail.value,
+        eraser: false,
       })
     } else if (e.target.dataset.color == 'b') {
       this.setData({
-        b: e.detail.value
+        b: e.detail.value,
+        eraser: false,
       })
     }
   },
@@ -212,7 +215,8 @@ Page({
     let w = this.data.w
     this.setData({
       w: e.detail.value,
-      canvasHeightLen: this.data.canvasHeightLen + w - e.detail.value
+      canvasHeightLen: this.data.canvasHeightLen + w - e.detail.value,
+      eraser: false,
     })
   },
 
