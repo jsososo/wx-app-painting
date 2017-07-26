@@ -10,8 +10,8 @@ Page({
     canvasHeight: 0,
     canvasHeightLen: 0,
     windowHeight: 0,
-    storeSrc: [],
     prevPosition: [0, 0],
+    background: '',
 
     btnInfo: [
       {
@@ -23,8 +23,8 @@ Page({
         background: 'url("http://img2.web07.cn/UpPic/Png/201411/19/334374191221572.png") white no-repeat; background-size: 24px 24px;background-position: 3px 3px;'
       },
       {
-        type: 'back',
-        background: 'url("http://reso3.yiihuu.com/img_1327664.gif") white no-repeat; background-size: 38px 38px;background-position: -4px -4px;'
+        type: 'clear',
+        background: 'url("http://img0.imgtn.bdimg.com/it/u=1358545290,3102156418&fm=26&gp=0.jpg") white no-repeat; background-size: 20px 20px;background-position: 5px 5px;'
       },
       {
         type: 'save',
@@ -37,6 +37,8 @@ Page({
     g: 33,
     b: 33,
     w: 2,
+    clear: false,
+    eraser: false,
   },
 
   /**
@@ -69,14 +71,9 @@ Page({
             }
             that.setData({
               canvasHeight: height,
-              canvasWidth: width
-            });
-            setTimeout(() => {
-              let ctx = wx.createCanvasContext('myCanvas');
-              ctx.drawImage(res.path, 0, 0, that.data.canvasWidth, that.data.canvasHeight);
-              ctx.draw();
-            }, 500)
-            
+              canvasWidth: width,
+              background: res.path
+            });            
           }
         })
       },
@@ -88,40 +85,57 @@ Page({
 
   tapBtn: function (e) {
     let btnType = e.target.dataset.type;
+    let that = this;
 
     if (btnType == 'width') {
       this.setData({
         width: !this.data.width,
         color: false,
+        clear: false,
         canvasHeightLen: (!this.data.width) ? Math.min(this.data.canvasHeight, this.data.windowHeight - this.data.w - 130) : 0,
       })
     } else if (btnType == 'color') {
       this.setData({
         width: false,
         color: !this.data.color,
+        clear: false,
         canvasHeightLen: (!this.data.color) ? Math.min(this.data.canvasHeight, this.data.windowHeight - this.data.w - 205) : 0,
       })
-    } else if (btnType == 'back') {
+    } else if (btnType == 'clear') {
       this.setData({
         width: false,
         color: false,
-        canvasHeightLen: 0 
+        clear: !this.data.clear,
+        canvasHeightLen: (!this.data.clear) ? Math.min(this.data.canvasHeight, this.data.windowHeight - this.data.w - 120) : 0,
       })
-      this.backLast();
     } else if (btnType == 'save') {
       this.setData({
         width: false,
         color: false,
+        clear: false,
         canvasHeightLen: 0 
       })
       wx.canvasToTempFilePath({
         canvasId: 'myCanvas',
         success: function (res) {
-          wx.saveImageToPhotosAlbum({
-            filePath: res.tempFilePath,
-            success: function (r) {
-              console.log(r)
-            }
+          let src = res.tempFilePath;
+
+          let ctx = wx.createCanvasContext('myCanvas');
+
+          ctx.drawImage(that.data.background, 0, 0, that.data.canvasWidth, that.data.canvasHeight);
+          ctx.drawImage(src, 0, 0, that.data.canvasWidth, that.data.canvasHeight);
+          ctx.draw();
+
+          wx.canvasToTempFilePath({
+            canvasId: 'myCanvas',
+            success: function (res) {
+              wx.saveImageToPhotosAlbum({
+                filePath: res.tempFilePath,
+                success: function (r) {
+                  console.log(r)
+                }
+              })
+            },
           })
         }
       })
@@ -136,52 +150,46 @@ Page({
       color: false,
       canvasHeightLen: 0
     })
-
-    let that = this;
-
-    wx.canvasToTempFilePath({
-      canvasId: 'myCanvas',
-      width: that.data.canvasWidth,
-      height: that.data.canvasHeight,
-      destHeight: that.data.canvasHeight,
-      destWidth: that.data.canvasWidth,
-      success: function (res) {
-        let src = that.data.storeSrc;
-        src.push(res.tempFilePath);
-
-        that.setData({
-          storeSrc: src
-        })
-      }
-    })
   },
 
   touchMove: function (e) {
     let ctx = wx.createCanvasContext('myCanvas');
 
-    ctx.setStrokeStyle("rgb(" + this.data.r + ', ' + this.data.g + ', ' + this.data.b + ')');
-    ctx.setLineWidth(this.data.w);
-    ctx.setLineCap('round');
-    ctx.setLineJoin('round');
-    ctx.moveTo(this.data.prevPosition[0], this.data.prevPosition[1]);
-    ctx.lineTo(e.touches[0].x, e.touches[0].y);
-    ctx.stroke();
-    ctx.draw(true);
+    if (this.data.eraser) {
+      ctx.clearRect(e.touches[0].x, e.touches[0].y, 20, 20);
+      ctx.draw(true);
+    } else {
+      ctx.setStrokeStyle("rgb(" + this.data.r + ', ' + this.data.g + ', ' + this.data.b + ')');
+      ctx.setLineWidth(this.data.w);
+      ctx.setLineCap('round');
+      ctx.setLineJoin('round');
+      ctx.moveTo(this.data.prevPosition[0], this.data.prevPosition[1]);
+      ctx.lineTo(e.touches[0].x, e.touches[0].y);
+      ctx.stroke();
+      ctx.draw(true);
+    }
 
     this.setData({
       prevPosition: [e.touches[0].x, e.touches[0].y]
     })
   },
 
-  backLast: function () {
-    let [ctx, storeSrc] = [wx.createCanvasContext('myCanvas'), this.data.storeSrc];
+  clearCanvas: function () {
+    let ctx = wx.createCanvasContext('myCanvas');
+    ctx.clearRect(0, 0, this.data.canvasWidth, this.data.canvasHeight);
+    ctx.draw();
+    this.setData({
+      clear: false,
+      canvasHeightLen: 0
+    })
+  },
 
-    if (storeSrc.length > 0) {
-      let src = storeSrc.pop();
-
-      ctx.drawImage(src, 0, 0);
-      ctx.draw();
-    }
+  chooseEraser: function () {
+    this.setData({
+      eraser: !this.data.eraser,
+      clear: false,
+      canvasHeightLen: 0
+    })
   },
 
   changeColor: function (e) {
