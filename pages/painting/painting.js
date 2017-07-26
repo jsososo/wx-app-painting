@@ -140,8 +140,10 @@ Page({
   },
 
   changeWidth: function (e) {
+    let w = this.data.w;
     this.setData({
-      w: e.detail.value
+      w: e.detail.value,
+      canvasHeight: this.data.canvasHeight - w + e.detail.value
     })
   },
 
