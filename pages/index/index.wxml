@@ -6,4 +6,8 @@
   <view class="item" bindtap="toPainting2">
     涂照片
   </view>
+  <view class='author'>
+    <view>design by soso (version 1.1)</view>
+    <view>contact: jsososo@outlook.com</view>
+  </view>
 </view>

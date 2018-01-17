@@ -32,5 +32,11 @@ Page({
     // wx.navigateTo({
     //   url: '../painting2/painting2',
     // })
+    wx.authorize({
+      scope: 'scope.writePhotosAlbum',
+    })
+  },
+
+  onShareAppMessage: function () {
   }
 })

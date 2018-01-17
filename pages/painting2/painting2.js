@@ -16,11 +16,11 @@ Page({
     btnInfo: [
       {
         type: 'width',
-        background: 'url("http://cdn3.freepik.com/image/th/318-28305.jpg"); background-size: 30px 30px;'
+        background: 'url("http://ov8a2tdri.bkt.clouddn.com/wx-app/icon-1.png"); background-size: 30px 30px;'
       },
       {
         type: 'color',
-        background: 'url("http://img2.web07.cn/UpPic/Png/201411/19/334374191221572.png") white no-repeat; background-size: 24px 24px;background-position: 3px 3px;'
+        background: 'url("http://ov8a2tdri.bkt.clouddn.com/wx-app/icon-2.png") white no-repeat; background-size: 24px 24px;background-position: 3px 3px;'
       },
       {
         type: 'clear',
@@ -28,7 +28,7 @@ Page({
       },
       {
         type: 'save',
-        background: 'url("http://msqq.com/d/file/icon/2014-04-12/a8b06d02b0eeac79c5e150fb24c6b1fc.png") white no-repeat; background-size: 20px 20px;background-position: 5px 5px;'
+        background: 'url("http://ov8a2tdri.bkt.clouddn.com/wx-app/icon-6.png") white no-repeat; background-size: 20px 20px;background-position: 5px 5px;'
       }
     ],
     width: false,
@@ -36,9 +36,11 @@ Page({
     r: 33,
     g: 33,
     b: 33,
-    w: 2,
+    w: 10,
     clear: false,
     eraser: false,
+    saving: false,
+    scope: false,
   },
 
   /**
@@ -56,29 +58,14 @@ Page({
         })
       },
     })
-    wx.chooseImage({
-      success: function(res) {
-        that.setData({
-          hasChoosedImg: true,
-        })
-        wx.getImageInfo({
-          src: res.tempFilePaths[0],
-          success: function(res) {
-            let [height, width] = [that.data.canvasWidth / res.width * res.height, that.data.canvasWidth];
-            if (height > that.data.windowHeight - 50) {
-              height = that.data.windowHeight - 50;
-              width = height / res.height * res.width;
-            }
-            that.setData({
-              canvasHeight: height,
-              canvasWidth: width,
-              background: res.path
-            });            
-          }
-        })
-      },
-      fail: function(res) {
-        console.log(res);
+    this.chooseImg();
+    wx.getSetting({
+      success(res) {
+        if (res.authSetting['scope.writePhotosAlbum']) {
+          that.setData({
+            scope: true,
+          })
+        }
       }
     })
   },
@@ -109,6 +96,29 @@ Page({
         canvasHeightLen: (!this.data.clear) ? Math.min(this.data.canvasHeight, this.data.windowHeight - this.data.w - 120) : 0,
       })
     } else if (btnType == 'save') {
+      if (!this.data.scope) {
+        wx.showModal({
+          title: '需要授权',
+          content: '保存图片需要获取您的授权',
+          success: (res) => {
+            if (res.confirm) {
+              wx.openSetting({
+                success: (res) => {
+                  if (res.authSetting['scope.writePhotosAlbum']) {
+                    this.setData({
+                      scope: true,
+                    })
+                  }
+                }
+              });
+            }
+          }
+        })
+      }
+      wx.showLoading({
+        title: '保存中',
+        mask: true,
+      })
       this.setData({
         width: false,
         color: false,
@@ -132,14 +142,64 @@ Page({
               wx.saveImageToPhotosAlbum({
                 filePath: res.tempFilePath,
                 success: function (r) {
-                  console.log(r)
+                  wx.hideLoading();
+                  wx.showToast({
+                    title: '保存成功',
+                  })
+                },
+                faile: function (err) {
+                  wx.hideLoading();
+                  wx.showToast({
+                    title: '保存失败',
+                    icon: 'loading'
+                  })
                 }
               })
             },
+            fail: function (res) {
+              wx.hideLoading();
+              wx.showToast({
+                title: '保存失败',
+                icon: 'loading',
+              })
+            }
           })
         }
       })
     }
+  },
+
+  addImg: function (e) {
+    this.chooseImg();
+  },
+
+  chooseImg() {
+    let that = this;
+    wx.chooseImage({
+      success: function (res) {
+        that.setData({
+          hasChoosedImg: true,
+        })
+        wx.getImageInfo({
+          src: res.tempFilePaths[0],
+          success: function (res) {
+            let [height, width] = [that.data.canvasWidth / res.width * res.height, that.data.canvasWidth];
+            if (height > that.data.windowHeight - 50) {
+              height = that.data.windowHeight - 50;
+              width = height / res.height * res.width;
+            }
+            that.setData({
+              canvasHeight: height,
+              canvasWidth: width,
+              background: res.path
+            });
+          }
+        })
+      },
+      fail: function (res) {
+        console.log(res);
+      }
+    })
   },
 
   touchStart: function (e) {

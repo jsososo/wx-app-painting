@@ -6,3 +6,9 @@
   line-height: 30px;
   border-bottom: 1px solid rgba(153, 204, 255, 0.3);
 }
+.author {
+  color: #999;
+  position: absolute;
+  bottom: 0;
+  padding-left: 20px;
+}
