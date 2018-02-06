@@ -3,7 +3,8 @@
     "pages/index/index",
     "pages/logs/logs",
     "pages/painting/painting",
-    "pages/painting2/painting2"
+    "pages/painting2/painting2",
+    "pages/pixel/pixel"
   ],
   "window": {
     "backgroundTextStyle": "light",

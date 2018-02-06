@@ -5,19 +5,6 @@ Page({
   data: {
     
   },
-
-  toPainting: function () {
-    wx.navigateTo({
-      url: '../painting/painting',
-    })
-  },
-
-  toPainting2: function () {
-    wx.navigateTo({
-      url: '../painting2/painting2',
-    })
-  },
-
   //事件处理函数
   onLoad: function () {
     console.log('onLoad')

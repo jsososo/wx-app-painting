@@ -1,11 +1,14 @@
 <!--index.wxml-->
 <view class="container">
-  <view class="item" bindtap="toPainting">
+  <navigator class="item" url="../painting/painting">
     画画
-  </view>
-  <view class="item" bindtap="toPainting2">
+  </navigator>
+  <navigator class="item" url="../painting2/painting2">
     涂照片
-  </view>
+  </navigator>
+  <navigator class="item" url='../pixel/pixel'>
+    像素涂鸦
+  </navigator>
   <view class='author'>
     <view>designed by soso (version 1.1)</view>
     <view>contact: jsososo@outlook.com</view>

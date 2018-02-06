@@ -1,3 +1,4 @@
+import utils from "../../utils/util";
 // painting-2.js
 Page({
 
@@ -7,11 +8,11 @@ Page({
   data: {
     hasChoosedImg: false,
     canvasWidth: 0,
-    canvasHeight: 0,
-    canvasHeightLen: 0,
-    windowHeight: 0,
-    prevPosition: [0, 0],
-    background: '',
+    canvasHeight: 0, // canvas的完整高度
+    canvasHeightLen: 0, // canvas的临时高度（用在操作栏影响画布高度时）
+    windowHeight: 0, // 屏幕高度
+    prevPosition: [0, 0], // 手指触摸的所在位置
+    background: '', // 背景图片，即导入的图片
 
     btnInfo: [
       {
@@ -31,16 +32,16 @@ Page({
         background: 'url("http://ov8a2tdri.bkt.clouddn.com/wx-app/icon-6.png") white no-repeat; background-size: 20px 20px;background-position: 5px 5px;'
       }
     ],
-    width: false,
-    color: false,
+    width: false, // 是否开启宽度调整栏
+    color: false, // 是否开启颜色调整栏
     r: 33,
     g: 33,
     b: 33,
     w: 10,
-    clear: false,
-    eraser: false,
-    saving: false,
-    scope: false,
+    clear: false, // 是否开启清空栏
+    eraser: false, // 是否开启橡皮擦
+    saving: false, // 是否在保存状态
+    scope: false, // 是否有保存图片的权限
   },
 
   /**
@@ -48,6 +49,7 @@ Page({
    */
   onLoad: function (options) {
     let that = this;
+    // 获取设备信息，canvas高度用
     wx.getSystemInfo({
       success: function(res) {
         console.log(res);
@@ -58,7 +60,9 @@ Page({
         })
       },
     })
+    // 选照片
     this.chooseImg();
+    // 检查权限，保存时提示弹窗用
     wx.getSetting({
       success(res) {
         if (res.authSetting['scope.writePhotosAlbum']) {
@@ -71,102 +75,7 @@ Page({
   },
 
   tapBtn: function (e) {
-    let btnType = e.target.dataset.type;
-    let that = this;
-
-    if (btnType == 'width') {
-      this.setData({
-        width: !this.data.width,
-        color: false,
-        clear: false,
-        canvasHeightLen: (!this.data.width) ? Math.min(this.data.canvasHeight, this.data.windowHeight - this.data.w - 130) : 0,
-      })
-    } else if (btnType == 'color') {
-      this.setData({
-        width: false,
-        color: !this.data.color,
-        clear: false,
-        canvasHeightLen: (!this.data.color) ? Math.min(this.data.canvasHeight, this.data.windowHeight - this.data.w - 205) : 0,
-      })
-    } else if (btnType == 'clear') {
-      this.setData({
-        width: false,
-        color: false,
-        clear: !this.data.clear,
-        canvasHeightLen: (!this.data.clear) ? Math.min(this.data.canvasHeight, this.data.windowHeight - this.data.w - 120) : 0,
-      })
-    } else if (btnType == 'save') {
-      if (!this.data.scope) {
-        wx.showModal({
-          title: '需要授权',
-          content: '保存图片需要获取您的授权',
-          success: (res) => {
-            if (res.confirm) {
-              wx.openSetting({
-                success: (res) => {
-                  if (res.authSetting['scope.writePhotosAlbum']) {
-                    this.setData({
-                      scope: true,
-                    })
-                  }
-                }
-              });
-            }
-          }
-        })
-      }
-      wx.showLoading({
-        title: '保存中',
-        mask: true,
-      })
-      this.setData({
-        width: false,
-        color: false,
-        clear: false,
-        canvasHeightLen: 0 
-      })
-      wx.canvasToTempFilePath({
-        canvasId: 'myCanvas',
-        success: function (res) {
-          let src = res.tempFilePath;
-
-          let ctx = wx.createCanvasContext('myCanvas');
-
-          ctx.drawImage(that.data.background, 0, 0, that.data.canvasWidth, that.data.canvasHeight);
-          ctx.drawImage(src, 0, 0, that.data.canvasWidth, that.data.canvasHeight);
-          ctx.draw();
-
-          wx.canvasToTempFilePath({
-            canvasId: 'myCanvas',
-            success: function (res) {
-              wx.saveImageToPhotosAlbum({
-                filePath: res.tempFilePath,
-                success: function (r) {
-                  wx.hideLoading();
-                  wx.showToast({
-                    title: '保存成功',
-                  })
-                },
-                faile: function (err) {
-                  wx.hideLoading();
-                  wx.showToast({
-                    title: '保存失败',
-                    icon: 'loading'
-                  })
-                }
-              })
-            },
-            fail: function (res) {
-              wx.hideLoading();
-              wx.showToast({
-                title: '保存失败',
-                icon: 'loading',
-              })
-            }
-          })
-        }
-      })
-    }
+    utils.tapBtn(e, this, 2);
   },
 
   addImg: function (e) {
@@ -183,6 +92,7 @@ Page({
         wx.getImageInfo({
           src: res.tempFilePaths[0],
           success: function (res) {
+            // 获取图片信息，主要为宽高，选择合适的自适应方式（将最大边完整显示）
             let [height, width] = [that.data.canvasWidth / res.width * res.height, that.data.canvasWidth];
             if (height > that.data.windowHeight - 50) {
               height = that.data.windowHeight - 50;
@@ -203,7 +113,7 @@ Page({
   },
 
   touchStart: function (e) {
-
+    // 开始画图，隐藏所有的操作栏
     this.setData({
       prevPosition: [e.touches[0].x, e.touches[0].y],
       width: false,
@@ -213,10 +123,11 @@ Page({
   },
 
   touchMove: function (e) {
+    // 触摸移动，绘制中。。。
     let ctx = wx.createCanvasContext('myCanvas');
 
     if (this.data.eraser) {
-      ctx.clearRect(e.touches[0].x, e.touches[0].y, 20, 20);
+      ctx.clearRect(e.touches[0].x, e.touches[0].y, 30, 30);
       ctx.draw(true);
     } else {
       ctx.setStrokeStyle("rgb(" + this.data.r + ', ' + this.data.g + ', ' + this.data.b + ')');
@@ -253,31 +164,11 @@ Page({
   },
 
   changeColor: function (e) {
-    if (e.target.dataset.color == 'r') {
-      this.setData({
-        r: e.detail.value,
-        eraser: false,
-      })
-    } else if (e.target.dataset.color == 'g') {
-      this.setData({
-        g: e.detail.value,
-        eraser: false,
-      })
-    } else if (e.target.dataset.color == 'b') {
-      this.setData({
-        b: e.detail.value,
-        eraser: false,
-      })
-    }
+    utils.changeColor(e, this);
   },
 
   changeWidth: function (e) {
-    let w = this.data.w
-    this.setData({
-      w: e.detail.value,
-      canvasHeightLen: this.data.canvasHeightLen + w - e.detail.value,
-      eraser: false,
-    })
+    utils.changeWidth(e, this, (this.data.canvasHeightLen + this.data.w - e.detail.value), 2);
   },
 
   /**

@@ -1,3 +1,4 @@
+import utils from "../../utils/util";
 // painting.js
 Page({
 
@@ -5,6 +6,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    // 参数作用可以参考painting2
     prevPosition: [0, 0],
     btnInfo: [
       {
@@ -32,15 +34,16 @@ Page({
     b: 33,
     w: 10,
     eraser: false,
-    canvasHeight: 50,
-    scope: false,
-    saving: false,
+    canvasHeight: 50, // 其实这个是操作栏的高度，不是canvas的高度。。直接使用100vh，因此不需要读取设备的宽高
+    scope: false, // 是否获得权限
+    saving: false, // 费否保存中
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    // 建立空白页并检查权限（如果非填充空白会发现保存为透明）
     let ctx = wx.createCanvasContext('myCanvas');
     ctx.rect(0, 0, 500, 800);
     ctx.setFillStyle('white');
@@ -60,11 +63,16 @@ Page({
 
   touchStart: function (e) {
     this.setData({
-      prevPosition: [e.touches[0].x, e.touches[0].y]
+      color: false,
+      width: false,
+      clear: false,
+      canvasHeight: 50,
+      prevPosition: [e.touches[0].x, e.touches[0].y],
     })
   },
 
   touchMove: function (e) {
+    // 触摸，绘制中。。
     let ctx = wx.createCanvasContext('myCanvas');
 
     if (!this.data.eraser) {
@@ -91,127 +99,15 @@ Page({
   },
 
   tapBtn: function (e) {
-    let btnType = e.target.dataset.type;
-
-    if (btnType == 'width') {
-      this.setData({
-        width: !this.data.width,
-        color: false,
-        clear: false,
-        canvasHeight: (!this.data.width) ? 130 + this.data.w : 50
-      })
-    } else if (btnType == 'color') {
-      this.setData({
-        width: false,
-        color: !this.data.color,
-        clear: false,
-        canvasHeight: (!this.data.color) ? 205 + this.data.w : 50
-      })
-    } else if (btnType == 'clear') {
-      this.setData({
-        width: false,
-        color: false,
-        clear: !this.data.clear,
-        canvasHeight: (!this.data.clear) ? 120 + this.data.w : 50
-      })
-    } else if (btnType == 'save') {
-      if (!this.data.scope) {
-        wx.showModal({
-          title: '需要授权',
-          content: '保存图片需要获取您的授权',
-          success: (res) => {
-            if (res.confirm) {
-              wx.openSetting({
-                success: (res) => {
-                  if (res.authSetting['scope.writePhotosAlbum']) {
-                    this.setData({
-                      scope: true,
-                    })
-                  }
-                }
-              });
-            }
-          }
-        })
-      }
-      if (this.data.scope && !this.data.saving) {
-        let that = this;
-        wx.showLoading({
-          title: '保存中',
-          mask: true,
-        })
-        this.setData({
-          width: false,
-          color: false,
-          clear: false,
-          canvasHeight: 50,
-          saving: true,
-        })
-        wx.canvasToTempFilePath({
-          canvasId: 'myCanvas',
-          success: function (res) {
-            wx.saveImageToPhotosAlbum({
-              filePath: res.tempFilePath,
-              success: function (r) {
-                wx.hideLoading();
-                wx.showToast({
-                  title: '保存成功',
-                })
-                that.setData({
-                  saving: false,
-                })
-              },
-              fail: function (res) {
-                console.log(res, 11);
-                wx.hideLoading();
-                wx.showToast({
-                  title: '保存失败',
-                  icon: 'loading',
-                })
-                that.setData({
-                  saving: false,
-                })
-              }
-            })
-          },
-          fail: function (res) {
-            console.log(res);
-            wx.hideLoading();
-            wx.showToast({
-              icon: 'loading',
-              title: '保存失败',
-            })
-          }
-        })
-      }
-    }
+    utils.tapBtn(e, this, 1);
   },
 
   changeColor: function (e) {
-    if (e.target.dataset.color == 'r') {
-      this.setData({
-        r: e.detail.value,
-        eraser: false,
-      })
-    } else if (e.target.dataset.color == 'g') {
-      this.setData({
-        g: e.detail.value,
-        eraser: false,
-      })
-    } else if (e.target.dataset.color == 'b') {
-      this.setData({
-        b: e.detail.value,
-        eraser: false,
-      })
-    }
+    utils.changeColor(e, this);
   },
 
   changeWidth: function (e) {
-    this.setData({
-      w: e.detail.value,
-      canvasHeight: 130 + e.detail.value,
-      eraser: false,
-    })
+    utils.changeWidth(e, this, 130 + e.detail.value, 1)
   },
 
   clearCanvas: function () {
