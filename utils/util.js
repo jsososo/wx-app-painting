@@ -64,7 +64,9 @@ function tapBtn(e, _this, pageType) {
         c.canvasHeight = (!_this.data.width) ? 130 + _this.data.w : 50
       } else if (pageType === 2) {
         c.canvasHeightLen = (!_this.data.width) ? Math.min(_this.data.canvasHeight, _this.data.windowHeight - _this.data.w - 130) : 0;
-      }    
+      } else if (pageType === 3) {
+        c.canvasHeight = 130;
+      }
       _this.setData({
         width: !_this.data.width,
         color: false,

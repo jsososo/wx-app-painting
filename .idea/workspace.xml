@@ -2,14 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e406e22d-9971-44fa-9393-f1e9a601704f" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/dictionaries/john.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app.json" afterPath="$PROJECT_DIR$/app.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/index/index.js" afterPath="$PROJECT_DIR$/pages/index/index.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/index/index.wxml" afterPath="$PROJECT_DIR$/pages/index/index.wxml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.gitignore" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/painting/painting.js" afterPath="$PROJECT_DIR$/pages/painting/painting.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/painting2/painting2.js" afterPath="$PROJECT_DIR$/pages/painting2/painting2.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/pixel/pixel.js" afterPath="$PROJECT_DIR$/pages/pixel/pixel.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/pixel/pixel.wxml" afterPath="$PROJECT_DIR$/pages/pixel/pixel.wxml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/pixel/pixel.wxss" afterPath="$PROJECT_DIR$/pages/pixel/pixel.wxss" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/utils/util.js" afterPath="$PROJECT_DIR$/utils/util.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -24,15 +22,12 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="painting2.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="painting2.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/pages/painting2/painting2.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="328">
-              <caret line="80" column="12" lean-forward="false" selection-start-line="80" selection-start-column="12" selection-end-line="80" selection-end-column="12" />
-              <folding>
-                <element signature="e#270#1025#0" expanded="false" />
-                <element signature="e#1248#1740#0" expanded="false" />
-              </folding>
+            <state relative-caret-position="498">
+              <caret line="168" column="0" lean-forward="true" selection-start-line="168" selection-start-column="0" selection-end-line="168" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -40,8 +35,88 @@
       <file leaf-file-name="util.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/utils/util.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="986">
-              <caret line="34" column="6" lean-forward="false" selection-start-line="34" selection-start-column="6" selection-end-line="34" selection-end-column="6" />
+            <state relative-caret-position="34">
+              <caret line="65" column="31" lean-forward="true" selection-start-line="65" selection-start-column="31" selection-end-line="65" selection-end-column="31" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="pixel.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/pages/pixel/pixel.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="116">
+              <caret line="19" column="13" lean-forward="true" selection-start-line="19" selection-start-column="13" selection-end-line="19" selection-end-column="13" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="README.md" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/README.md">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="435">
+              <caret line="15" column="2" lean-forward="true" selection-start-line="15" selection-start-column="2" selection-end-line="15" selection-end-column="2" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="painting.wxml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/pages/painting/painting.wxml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="754">
+              <caret line="26" column="7" lean-forward="true" selection-start-line="17" selection-start-column="0" selection-end-line="26" selection-end-column="7" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="painting.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/pages/painting/painting.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="527">
+              <caret line="83" column="5" lean-forward="true" selection-start-line="77" selection-start-column="4" selection-end-line="83" selection-end-column="5" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="pixel.json" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/pages/pixel/pixel.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="pixel.wxml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/pages/pixel/pixel.wxml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="261">
+              <caret line="9" column="28" lean-forward="false" selection-start-line="9" selection-start-column="28" selection-end-line="9" selection-end-column="28" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="painting.wxss" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/pages/painting/painting.wxss">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="406">
+              <caret line="14" column="16" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="57" selection-end-column="1" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="pixel.wxss" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/pages/pixel/pixel.wxss">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="490">
+              <caret line="47" column="18" lean-forward="true" selection-start-line="47" selection-start-column="18" selection-end-line="47" selection-end-column="18" />
               <folding />
             </state>
           </provider>
@@ -51,7 +126,11 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
+      <find>clear</find>
       <find>tapBtn</find>
+      <find>width</find>
+      <find>eraser</find>
+      <find>changeWidth</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -60,9 +139,12 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/utils/util.js" />
         <option value="$PROJECT_DIR$/pages/painting/painting.js" />
         <option value="$PROJECT_DIR$/pages/painting2/painting2.js" />
+        <option value="$PROJECT_DIR$/utils/util.js" />
+        <option value="$PROJECT_DIR$/pages/pixel/pixel.wxss" />
+        <option value="$PROJECT_DIR$/pages/pixel/pixel.wxml" />
+        <option value="$PROJECT_DIR$/pages/pixel/pixel.js" />
       </list>
     </option>
   </component>
@@ -99,6 +181,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -114,6 +197,12 @@
             <path>
               <item name="wx-app-painting" type="b2602c69:ProjectViewProjectNode" />
               <item name="wx-app-painting" type="462c0819:PsiDirectoryNode" />
+              <item name="pages" type="462c0819:PsiDirectoryNode" />
+              <item name="pixel" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="wx-app-painting" type="b2602c69:ProjectViewProjectNode" />
+              <item name="wx-app-painting" type="462c0819:PsiDirectoryNode" />
               <item name="utils" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
@@ -121,16 +210,16 @@
         </subPane>
       </pane>
       <pane id="Scratches" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../wx-app-plan" />
     <property name="settings.editor.selected.configurable" value="Settings.JavaScript" />
     <property name="JavaScriptPreferStrict" value="false" />
     <property name="JavaScriptWeakerCompletionTypeGuess" value="true" />
     <property name="nodejs_interpreter_path" value="C:/Program Files/nodejs/node" />
+    <property name="HbShouldOpenHtmlAsHb" value="" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -158,18 +247,20 @@
       <option name="presentableId" value="Default" />
       <updated>1517473891449</updated>
       <workItem from="1517473892971" duration="2015000" />
-      <workItem from="1517881646026" duration="4000" />
+      <workItem from="1517881646026" duration="603000" />
+      <workItem from="1519352706898" duration="164000" />
+      <workItem from="1519462173218" duration="2389000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="2019000" />
+    <option name="totallyTimeSpent" value="5171000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-9" y="-9" width="1938" height="1050" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.50907356" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16458334" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="NativeScript" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -199,7 +290,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/pages/painting2/painting2.js</url>
-          <line>266</line>
+          <line>170</line>
         </line-breakpoint>
       </breakpoints>
       <option name="time" value="1" />
@@ -211,17 +302,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#270#1025#0" expanded="false" />
-            <element signature="e#1248#1740#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/utils/util.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="986">
-          <caret line="34" column="6" lean-forward="true" selection-start-line="34" selection-start-column="6" selection-end-line="34" selection-end-column="6" />
           <folding />
         </state>
       </provider>
@@ -234,28 +314,123 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pages/painting/painting.js">
+    <entry file="file://$PROJECT_DIR$/pages/painting2/painting2.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="259">
-          <caret line="93" column="8" lean-forward="false" selection-start-line="93" selection-start-column="2" selection-end-line="93" selection-end-column="8" />
-          <folding>
-            <element signature="e#3545#4830#0" expanded="false" />
-            <marker date="1517475449283" expanded="true" signature="3046:3134" ph="{&quot;title&quot;: '需要授权'...}" />
-            <marker date="1517475449283" expanded="true" signature="3136:3157" ph="{...}" />
-            <marker date="1517475449283" expanded="true" signature="3198:3232" ph="{...}" />
-            <marker date="1517475449283" expanded="true" signature="3234:3261" ph="{...}" />
-          </folding>
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/utils/util.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="986">
+          <caret line="34" column="6" lean-forward="false" selection-start-line="34" selection-start-column="6" selection-end-line="34" selection-end-column="6" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/pages/painting2/painting2.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="328">
-          <caret line="80" column="12" lean-forward="false" selection-start-line="80" selection-start-column="12" selection-end-line="80" selection-end-column="12" />
-          <folding>
-            <element signature="e#270#1025#0" expanded="false" />
-            <element signature="e#1248#1740#0" expanded="false" />
-          </folding>
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/utils/util.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="986">
+          <caret line="34" column="6" lean-forward="true" selection-start-line="34" selection-start-column="6" selection-end-line="34" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/painting2/painting2.wxml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="319">
+          <caret line="11" column="0" lean-forward="false" selection-start-line="11" selection-start-column="0" selection-end-line="30" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/painting/painting.wxss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="406">
+          <caret line="14" column="16" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="57" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/painting2/painting2.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="498">
+          <caret line="168" column="0" lean-forward="true" selection-start-line="168" selection-start-column="0" selection-end-line="168" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/pixel/pixel.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/painting/painting.wxml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="754">
+          <caret line="26" column="7" lean-forward="true" selection-start-line="17" selection-start-column="0" selection-end-line="26" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/pixel/pixel.wxss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="490">
+          <caret line="47" column="18" lean-forward="true" selection-start-line="47" selection-start-column="18" selection-end-line="47" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/painting/painting.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="527">
+          <caret line="83" column="5" lean-forward="true" selection-start-line="77" selection-start-column="4" selection-end-line="83" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="435">
+          <caret line="15" column="2" lean-forward="true" selection-start-line="15" selection-start-column="2" selection-end-line="15" selection-end-column="2" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/utils/util.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="65" column="31" lean-forward="true" selection-start-line="65" selection-start-column="31" selection-end-line="65" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/pixel/pixel.wxml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="261">
+          <caret line="9" column="28" lean-forward="false" selection-start-line="9" selection-start-column="28" selection-end-line="9" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/pixel/pixel.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="116">
+          <caret line="19" column="13" lean-forward="true" selection-start-line="19" selection-start-column="13" selection-end-line="19" selection-end-column="13" />
+          <folding />
         </state>
       </provider>
     </entry>

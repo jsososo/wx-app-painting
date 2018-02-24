@@ -1,1 +1,64 @@
 /* pages/pixel/pixel.wxss */
+/* painting.wxss */
+page {
+    background: rgba(153, 204, 255, 0.1);
+}
+
+canvas {
+    width: 100vw;
+}
+
+.bottom {
+    width: 100vw;
+    height: 50px;
+    position: absolute;
+    bottom: 0;
+    display: flex;
+    justify-content: space-around;
+}
+
+.list-item {
+    width: 30px;
+    height: 30px;
+    margin: 10px 0;
+    border-radius: 50%;
+}
+
+.choose-box {
+    width: 100vw;
+    position: absolute;
+    bottom: 50px;
+}
+
+.color-box {
+    width: 50vw;
+    margin: 20px auto;
+}
+
+slider {
+    margin: 20px 30px;
+}
+
+.text-center {
+    text-align: center;
+    color: #666;
+}
+
+.choose-box-flex {
+    display: flex;
+    justify-content: space-around;
+    width: 100vw;
+    position: absolute;
+    bottom: 50px;
+    font-size: 16px;
+    color: #666;
+    text-align: center;
+}
+.choose-img {
+    width: 30px;
+    height: 30px;
+    margin: 10px;
+
+    border-radius: 50%;
+    background: white;
+}

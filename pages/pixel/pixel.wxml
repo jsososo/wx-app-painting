@@ -1,2 +1,27 @@
-<!--pages/pixel/pixel.wxml-->
-<text>pages/pixel/pixel.wxml</text>
+<!--pixel.wxml-->
+<canvas canvas-id="myCanvas" style="height: calc(100vh - {{canvasHeight}}px)" disable-scroll="true" bindtouchend="toucheEnd" bindtouchstart="touchStart" bindtouchmove="touchMove"/>
+<view class="bottom">
+    <block wx:for="{{btnInfo}}" wx:key="{{index}}">
+        <view class="list-item" data-type="{{item.type}}" style="background: {{item.background}}" bindtap="tapBtn"></view>
+    </block>
+</view>
+<view class="choose-box" wx:if="{{width}}">
+    <view class="text-center">单个格子边长: {{w}}</view>
+    <slider min="5" max="100" step="1" show-value="true" value="{{w}}" bindchange="changeWidth"/>
+</view>
+<view class="choose-box" wx:if="{{color}}">
+    <view class="color-box" style="background: {{'rgb(' + r + ', ' + g + ', ' + b + ')'}}; height: {{w}}px; border-radius: {{w/2}}px"></view>
+    <slider min="0" max="255" step="1" show-value="true" activeColor="red" value="{{r}}" data-color="r" bindchange="changeColor"/>
+    <slider min="0" max="255" step="1" show-value="true" activeColor="green" value="{{g}}" data-color="g" bindchange="changeColor"/>
+    <slider min="0" max="255" step="1" show-value="true" activeColor="blue" value="{{b}}" data-color="b" bindchange="changeColor"/>
+</view>
+<view class="choose-box-flex" wx:if="{{clear}}">
+    <view class="choose-item" bindtap="chooseEraser">
+        <view class="choose-img" style='background: url("http://ov8a2tdri.bkt.clouddn.com/wx-app/icon-5.png") white no-repeat; background-size: 26px 26px;background-position: 2px 2px; border: {{eraser ? "2px solid #888" : "2px solid transparent"}}'></view>
+        <view>橡皮擦</view>
+    </view>
+    <view class="choose-item" bindtap="clearCanvas">
+        <view class="choose-img" style='background: url("http://ov8a2tdri.bkt.clouddn.com/wx-app/icon-4.png") white no-repeat; background-size: 26px 26px;background-position: 2px 2px;'></view>
+        <view>清空</view>
+    </view>
+</view>

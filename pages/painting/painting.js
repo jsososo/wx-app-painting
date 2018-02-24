@@ -101,16 +101,17 @@ Page({
   tapBtn: function (e) {
     utils.tapBtn(e, this, 1);
   },
-
+  // 修改画笔颜色
   changeColor: function (e) {
     utils.changeColor(e, this);
   },
-
+  // 修改画笔宽度
   changeWidth: function (e) {
     utils.changeWidth(e, this, 130 + e.detail.value, 1)
   },
 
   clearCanvas: function () {
+    // 重置
     let ctx = wx.createCanvasContext('myCanvas');
     ctx.rect(0, 0, 500, 800);
     ctx.setFillStyle('white');
@@ -123,6 +124,7 @@ Page({
   },
 
   chooseEraser: function () {
+    // 橡皮擦(其实为白色覆盖涂鸦)
     this.setData({
       eraser: !this.data.eraser,
       clear: false,
