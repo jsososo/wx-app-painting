@@ -36,17 +36,32 @@ Page({
     eraser: false,
     canvasHeight: 50, // 其实这个是操作栏的高度，不是canvas的高度。。直接使用100vh，因此不需要读取设备的宽高
     scope: false, // 是否获得权限
-    saving: false, // 费否保存中
+    saving: false, // 是否保存中
+    pageType: 'whiteBoard',
+    bgColor: 'white',
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    // 确定页面类型（普通的白板涂鸦和荧光涂鸦）
+    const tempObj = {
+      bgColor: options.pageType === 'whiteBoard' ? 'white' : 'black',
+      pageType: options.pageType,
+    }
+    if (options.pageType === 'highlighter') {
+      tempObj.r = 255;
+      tempObj.g = 255;
+      tempObj.b = 255;
+    }
+    this.setData({
+      ...tempObj
+    })
     // 建立空白页并检查权限（如果非填充空白会发现保存为透明）
     let ctx = wx.createCanvasContext('myCanvas');
-    ctx.rect(0, 0, 500, 800);
-    ctx.setFillStyle('white');
+    ctx.rect(0, 0, 10000, 10000);
+    ctx.setFillStyle(tempObj.bgColor);
     ctx.fill();
     ctx.draw();
     let that = this;
@@ -72,15 +87,20 @@ Page({
   },
 
   touchMove: function (e) {
+    const { r, g, b } = this.data;
     // 触摸，绘制中。。
     let ctx = wx.createCanvasContext('myCanvas');
 
     if (!this.data.eraser) {
-      ctx.setStrokeStyle("rgb(" + this.data.r + ', ' + this.data.g + ', ' + this.data.b + ')');
+      ctx.setStrokeStyle(`rgb(${r},${g},${b})`);
+      if (this.data.pageType === 'highlighter') {
+        ctx.setShadow(0, 0, 30, `rgba(${r},${g},${b},0.6)`);
+      }
       ctx.setLineWidth(this.data.w);
     } else {
-      ctx.setStrokeStyle('white');
-      ctx.setLineWidth(10);
+      ctx.setStrokeStyle(this.data.bgColor);
+      ctx.setShadow(0, 0, 0, 'black');
+      ctx.setLineWidth(20);
     }
     ctx.setLineCap('round');
     ctx.setLineJoin('round');
@@ -92,10 +112,6 @@ Page({
     this.setData({
       prevPosition: [e.touches[0].x, e.touches[0].y]
     })
-  },
-
-  touchEnd: function (e) {
-    
   },
 
   tapBtn: function (e) {
@@ -114,7 +130,7 @@ Page({
     // 重置
     let ctx = wx.createCanvasContext('myCanvas');
     ctx.rect(0, 0, 500, 800);
-    ctx.setFillStyle('white');
+    ctx.setFillStyle(this.data.bgColor);
     ctx.fill();
     ctx.draw();
     this.setData({
@@ -136,48 +152,13 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-  
-  },
 
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-  
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-  
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-  
   },
 
   /**
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-  
+
   }
 })

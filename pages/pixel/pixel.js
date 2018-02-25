@@ -7,7 +7,6 @@ Page({
      */
     data: {
         // 参数作用可以参考painting2
-        prevPosition: [0, 0],
         btnInfo: [
             {
                 type: 'width',
@@ -45,7 +44,7 @@ Page({
     onLoad: function (options) {
         // 建立空白页并检查权限（如果非填充空白会发现保存为透明）
         let ctx = wx.createCanvasContext('myCanvas');
-        ctx.rect(0, 0, 500, 800);
+        ctx.rect(0, 0, 10000, 10000);
         ctx.setFillStyle('white');
         ctx.fill();
         ctx.draw();

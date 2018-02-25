@@ -1,0 +1,19 @@
+<!--pages/version/version.wxml-->
+<view class="info-block">
+  <view class="version-no">v1.2.2</view>
+  <view class="version-info">
+    新增荧光涂鸦
+  </view>
+</view>
+<view class="info-block">
+  <view class="version-no">v1.2</view>
+  <view class="version-info">
+    新增像素涂鸦
+  </view>
+</view>
+<view class="info-block">
+  <view class="version-no">v1.1</view>
+  <view class="version-info">
+    修改图片来源路径，优化权限提醒
+  </view>
+</view>

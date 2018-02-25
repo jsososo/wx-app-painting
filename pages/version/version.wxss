@@ -1,0 +1,18 @@
+/* pages/version/version.wxss */
+
+.info-block {
+  padding: 20rpx 30rpx;
+}
+
+.version-no {
+  color: #333;
+  display: inline-block;
+  width: 80rpx;
+  vertical-align: top;
+}
+
+.version-info {
+  display: inline-block;
+  width: 600rpx;
+  color: #666;
+}

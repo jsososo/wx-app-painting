@@ -4,7 +4,8 @@
     "pages/logs/logs",
     "pages/painting/painting",
     "pages/painting2/painting2",
-    "pages/pixel/pixel"
+    "pages/pixel/pixel",
+    "pages/version/version"
   ],
   "window": {
     "backgroundTextStyle": "light",

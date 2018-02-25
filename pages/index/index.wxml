@@ -1,6 +1,6 @@
 <!--index.wxml-->
 <view class="container">
-  <navigator class="item" url="../painting/painting">
+  <navigator class="item" url="../painting/painting?pageType=whiteBoard">
     画画
   </navigator>
   <navigator class="item" url="../painting2/painting2">
@@ -9,8 +9,13 @@
   <navigator class="item" url='../pixel/pixel'>
     像素涂鸦
   </navigator>
+  <navigator class="item" url="../painting/painting?pageType=highlighter">
+    荧光涂鸦
+  </navigator>
   <view class='author'>
-    <view>designed by soso (version 1.1)</view>
+    <view>designed by soso
+      <navigator url="../version/version" style="text-decoration: underline; display: inline">(version 1.2.2)</navigator>
+    </view>
     <view>contact: jsososo@outlook.com</view>
   </view>
 </view>

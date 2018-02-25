@@ -1,15 +1,16 @@
 /* painting.wxss */
+
 page {
   background: rgba(153, 204, 255, 0.1);
 }
 
 canvas {
-  width: 100vw;
+  width: 750rpx;
 }
 
 .bottom {
-  width: 100vw;
-  height: 50px;
+  width: 750rpx;
+  height: 100rpx;
   position: absolute;
   bottom: 0;
   display: flex;
@@ -17,42 +18,47 @@ canvas {
 }
 
 .list-item {
-  width: 30px;
-  height: 30px;
-  margin: 10px 0;
+  width: 60rpx;
+  height: 60rpx;
+  margin: 20rpx 0;
   border-radius: 50%;
 }
 
 .choose-box {
-  width: 100vw;
+  width: 750rpx;
   position: absolute;
-  bottom: 50px;
+  bottom: 100rpx;
 }
 
 .color-box {
-  width: 50vw;
-  margin: 20px auto;
+  width: 375rpx;
+  margin: 40rpx auto;
 }
 
 slider {
-  margin: 20px 30px;
+  margin: 40rpx 60rpx;
+}
+
+.switch-box {
+  text-align: center;
+  color: #666;
 }
 
 .choose-box-flex {
   display: flex;
   justify-content: space-around;
-  width: 100vw;
+  width: 750rpx;
   position: absolute;
-  bottom: 50px;
-  font-size: 16px;
+  bottom: 100rpx;
+  font-size: 32rpx;
   color: #666;
   text-align: center;
 }
-.choose-img {
-  width: 30px;
-  height: 30px;
-  margin: 10px;
 
+.choose-img {
+  width: 60rpx;
+  height: 60rpx;
+  margin: 20rpx;
   border-radius: 50%;
   background: white;
 }

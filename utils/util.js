@@ -18,22 +18,12 @@ function formatNumber(n) {
 
 // 公用的修改颜色
 function changeColor(e, _this) {
-  if (e.target.dataset.color == 'r') {
-    _this.setData({
-      r: e.detail.value,
-      eraser: false,
-    })
-  } else if (e.target.dataset.color == 'g') {
-    _this.setData({
-      g: e.detail.value,
-      eraser: false,
-    })
-  } else if (e.target.dataset.color == 'b') {
-    _this.setData({
-      b: e.detail.value,
-      eraser: false,
-    })
-  }
+  let tempData = {};
+  tempData[e.target.dataset.color] = e.detail.value;
+  _this.setData({
+    ...tempData,
+    eraser: false,
+  });
 }
 
 // 公用的修改画笔宽度
@@ -55,7 +45,7 @@ function changeWidth(e, _this, canvasHeight, pageType) {
 function tapBtn(e, _this, pageType) {
   let btnType = e.target.dataset.type;
 
-  let c = {} ;
+  let c = {};
 
   switch (btnType) {
     // 画笔宽度
@@ -75,12 +65,12 @@ function tapBtn(e, _this, pageType) {
       });
       return;
     // 画笔颜色
-    case 'color': 
+    case 'color':
       if (pageType === 1) {
         c.canvasHeight = (!_this.data.color) ? 205 + _this.data.w : 50;
       } else if (pageType === 2) {
         c.canvasHeightLen = (!_this.data.color) ? Math.min(_this.data.canvasHeight, _this.data.windowHeight - _this.data.w - 205) : 0;
-      } 
+      }
       _this.setData({
         width: false,
         color: !_this.data.color,
@@ -104,8 +94,8 @@ function tapBtn(e, _this, pageType) {
       return;
     // 保存
     case 'save':
-    saveImg(_this, pageType);
-     return;
+      saveImg(_this, pageType);
+      return;
     default:
       return;
   }
@@ -182,7 +172,7 @@ function saveImg(_this, pageType) {
   }
 }
 
-function _canvaseSaveToImg (_this) {
+function _canvaseSaveToImg(_this) {
   // 调用微信canvas存为图片
   wx.canvasToTempFilePath({
     canvasId: 'myCanvas',
