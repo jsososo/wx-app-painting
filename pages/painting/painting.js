@@ -1,4 +1,5 @@
 import utils from "../../utils/util";
+import { recordPointsFun, startTouch, reDraw, drawBack, clearPoints } from '../../utils/paint.js';
 // painting.js
 Page({
 
@@ -83,24 +84,24 @@ Page({
       clear: false,
       canvasHeight: 50,
       prevPosition: [e.touches[0].x, e.touches[0].y],
-    })
+    });
+    const { r, g, b } = this.data;
+    startTouch(e, `rgb(${r},${g},${b})`, this.data.w);
   },
 
   touchMove: function (e) {
     const { r, g, b } = this.data;
     // 触摸，绘制中。。
     let ctx = wx.createCanvasContext('myCanvas');
+    // 画笔的颜色
+    let color = `rgb(${r},${g},${b})`;
+    // 荧光的颜色
+    let shadowColor = `rgba(${r},${g},${b},0.6)`;
 
-    if (!this.data.eraser) {
-      ctx.setStrokeStyle(`rgb(${r},${g},${b})`);
-      if (this.data.pageType === 'highlighter') {
-        ctx.setShadow(0, 0, 30, `rgba(${r},${g},${b},0.6)`);
-      }
-      ctx.setLineWidth(this.data.w);
-    } else {
-      ctx.setStrokeStyle(this.data.bgColor);
-      ctx.setShadow(0, 0, 0, 'black');
-      ctx.setLineWidth(20);
+    ctx.setLineWidth(this.data.w);
+    ctx.setStrokeStyle(color);
+    if (this.data.pageType === 'highlighter') {
+      ctx.setShadow(0, 0, 30, `rgba(${r},${g},${b},0.6)`);
     }
     ctx.setLineCap('round');
     ctx.setLineJoin('round');
@@ -112,6 +113,7 @@ Page({
     this.setData({
       prevPosition: [e.touches[0].x, e.touches[0].y]
     })
+    recordPointsFun(e);
   },
 
   tapBtn: function (e) {
@@ -124,6 +126,10 @@ Page({
   // 修改画笔宽度
   changeWidth: function (e) {
     utils.changeWidth(e, this, 130 + e.detail.value, 1)
+  },
+
+  tapDraBack (e) {
+    drawBack(this);
   },
 
   clearCanvas: function () {
@@ -139,20 +145,8 @@ Page({
     })
   },
 
-  chooseEraser: function () {
-    // 橡皮擦(其实为白色覆盖涂鸦)
-    this.setData({
-      eraser: !this.data.eraser,
-      clear: false,
-      canvasHeight: 50
-    })
-  },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
+  onShow() {
+    clearPoints();
   },
 
   /**

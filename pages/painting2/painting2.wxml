@@ -1,6 +1,6 @@
 <!--painting-2.wxml-->
 <canvas canvas-id="myCanvas" disable-scroll="true" bindtouchstart="touchStart"
-  bindtouchmove="touchMove" bindtouchend="touchEnd" wx:if="{{hasChoosedImg}}"
+  bindtouchmove="touchMove" wx:if="{{hasChoosedImg}}"
   style="height: {{(canvasHeightLen == 0) ? canvasHeight : canvasHeightLen}}px; width: {{canvasWidth}}px; background: url('{{background}}');background-position: 0 0; background-size: {{canvasWidth}}px {{canvasHeight}}px" 
 />
 <view class="failText" wx:if="{{!hasChoosedImg}}" bindtap="addImg">没有选择照片，点击重新选择</view>
