@@ -13,12 +13,13 @@ export const startTouch = (e, color, width) => {
 };
 
 // 记录一条线内的每个点
-export const recordPointsFun = (e) => {
+export const recordPointsFun = (e, _this) => {
   const l = recordPoints.length;
   recordPoints[l-1].push({
     x: e.touches[0].x,
     y: e.touches[0].y,
   });
+  // reDraw(_this)
 };
 
 // 绘制过程
@@ -50,6 +51,10 @@ export const reDraw = (_this) => {
   });
 
   ctx.draw();
+
+  _this.setData({
+    prevPosition: [-1, -1]
+  });
 };
 
 // 后退

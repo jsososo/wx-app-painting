@@ -8,7 +8,7 @@ Page({
    */
   data: {
     // 参数作用可以参考painting2
-    prevPosition: [0, 0],
+    prevPosition: [-1, -1],
     btnInfo: [
       {
         type: 'width',
@@ -40,6 +40,7 @@ Page({
     saving: false, // 是否保存中
     pageType: 'whiteBoard',
     bgColor: 'white',
+    movePosition: [-1, -1],
   },
 
   /**
@@ -84,19 +85,22 @@ Page({
       clear: false,
       canvasHeight: 50,
       prevPosition: [e.touches[0].x, e.touches[0].y],
+      movePosition: [e.touches[0].x, e.touches[0].y],
     });
     const { r, g, b } = this.data;
     startTouch(e, `rgb(${r},${g},${b})`, this.data.w);
   },
 
   touchMove: function (e) {
-    const { r, g, b } = this.data;
+    const { r, g, b, prevPosition, movePosition } = this.data;
     // 触摸，绘制中。。
     const ctx = wx.createCanvasContext('myCanvas');
     // 画笔的颜色
     const color = `rgb(${r},${g},${b})`;
     // 荧光的颜色
     let shadowColor = `rgba(${r},${g},${b},0.6)`;
+
+    const [pX, pY, cX, cY] = [...prevPosition, e.touches[0].x, e.touches[0].y];
 
     ctx.setLineWidth(this.data.w);
     ctx.setStrokeStyle(color);
@@ -105,19 +109,20 @@ Page({
     }
     ctx.setLineCap('round');
     ctx.setLineJoin('round');
-    ctx.moveTo(this.data.prevPosition[0], this.data.prevPosition[1]);
-    ctx.lineTo(e.touches[0].x, e.touches[0].y);
+    ctx.moveTo(...movePosition);
+    ctx.quadraticCurveTo(pX, pY, (cX + pX) / 2, (cY + pY) / 2);
     ctx.stroke();
     ctx.draw(true);
 
     this.setData({
-      prevPosition: [e.touches[0].x, e.touches[0].y]
+      prevPosition: [cX, cY],
+      movePosition: [(cX + pX) / 2, (cY + pY) / 2]
     });
-    recordPointsFun(e);
+    recordPointsFun(e, this);
   },
 
   touchEnd() {
-    reDraw(this);
+    // reDraw(this);
   },
 
   tapBtn: function (e) {
