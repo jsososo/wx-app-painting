@@ -1,8 +1,3 @@
-// 跟绘制有关的一些方法
-// 原先采用的是 bindtouchmove 这个方法带来了两个问题：
-//    1、性能问题，尤其是性能比较差的手机，当滑动比较快的时候会出现线条断断续续的
-//    2、在绘制半透明的时候会出现一些颜色特别重的小点，主要是因为重复调用 ctx.draw()引起
-// 所以这里将绘制的一些方法重新整合一下，采用 setInterval 一直记录点，然后进行存储，这种方法也方便撤销
 
 const App = getApp();
 const recordPoints = App.globalData.recordPoints;
@@ -37,7 +32,7 @@ export const reDraw = (_this) => {
     // 线的宽度
     ctx.setLineWidth(line[0].width);
     // 线的颜色
-    ctx.setStrokeStyle(line.color);
+    ctx.setStrokeStyle('blue');
     // 起始位置
     ctx.moveTo(line[0].x, line[0].y);
     // 这些样式就默认了
@@ -45,12 +40,12 @@ export const reDraw = (_this) => {
     ctx.setLineJoin('round');
 
     line.forEach((p, i) => {
-      // 第一个点就不管了
-      if (i === 0) {
-        return;
+      if (i && line[i+1]) {
+        // 让曲线更加平滑
+        ctx.quadraticCurveTo(p.x, p.y, (p.x + line[i+1].x) / 2, (p.y + line[i+1].y) / 2);
       }
-      ctx.lineTo(p.x, p.y);
-    })
+    });
+    ctx.imageSmoothingEnabled = true;
     ctx.stroke();
   });
 

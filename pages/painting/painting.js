@@ -92,9 +92,9 @@ Page({
   touchMove: function (e) {
     const { r, g, b } = this.data;
     // 触摸，绘制中。。
-    let ctx = wx.createCanvasContext('myCanvas');
+    const ctx = wx.createCanvasContext('myCanvas');
     // 画笔的颜色
-    let color = `rgb(${r},${g},${b})`;
+    const color = `rgb(${r},${g},${b})`;
     // 荧光的颜色
     let shadowColor = `rgba(${r},${g},${b},0.6)`;
 
@@ -112,8 +112,12 @@ Page({
 
     this.setData({
       prevPosition: [e.touches[0].x, e.touches[0].y]
-    })
+    });
     recordPointsFun(e);
+  },
+
+  touchEnd() {
+    reDraw(this);
   },
 
   tapBtn: function (e) {
