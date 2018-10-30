@@ -21,11 +21,11 @@
 </view>
 <view class="choose-box-flex" wx:if="{{clear}}">
   <view class="choose-item" bindtap="chooseEraser">
-    <view class="choose-img" style='background: url("http://ov8a2tdri.bkt.clouddn.com/wx-app/icon-5.png") white no-repeat; background-size: 26px 26px;background-position: 2px 2px; border: {{eraser ? "2px solid #888" : "2px solid transparent"}}'></view>
+    <view class="choose-img" style='background: url("http://bmob-cdn-20716.b0.upaiyun.com/2018/10/29/997c2bf5404e5abc809b42fe6bb902f9.png") white no-repeat; background-size: 26px 26px;background-position: 2px 2px; border: {{eraser ? "2px solid #888" : "2px solid transparent"}}'></view>
     <view>橡皮擦</view>
   </view>
   <view class="choose-item" bindtap="clearCanvas">
-    <view class="choose-img" style='background: url("http://ov8a2tdri.bkt.clouddn.com/wx-app/icon-4.png") white no-repeat; background-size: 26px 26px;background-position: 2px 2px;'></view>
+    <view class="choose-img" style='background: url("http://bmob-cdn-20716.b0.upaiyun.com/2018/10/29/33f80e334020a90b80e8cd8423cb8fbe.png") white no-repeat; background-size: 26px 26px;background-position: 2px 2px;'></view>
     <view>清空</view>
   </view>
 </view>

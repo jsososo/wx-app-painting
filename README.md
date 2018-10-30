@@ -10,7 +10,7 @@
 
 ### 新的绘制方式
 
-在 ```dev/newDraw``` 分支上提供了一种新的绘制方式，利用 记录点的形式，可以实现撤回效果。打算之后使用 setInterval 来记录而不是touchMove，toucheMove在低端机上性能存疑。
+在 ```dev/newDraw``` 分支上提供了一种新的绘制方式，利用 记录点的形式，可以实现撤回效果。使用 ```quadraticCurveTo```替代```lineTo```使曲线更平滑。
 
 
 ### 版本更新
