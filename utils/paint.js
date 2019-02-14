@@ -24,21 +24,23 @@ export const recordPointsFun = (e, _this) => {
 
 // 绘制过程
 export const reDraw = (_this) => {
-  let ctx = wx.createCanvasContext('myCanvas');
-  ctx.rect(-10, -10, 10000, 10000);
+  const ctx = wx.createCanvasContext('myCanvas');
+  ctx.rect(-100, -100, 10000, 10000);
   ctx.setFillStyle('white');
   ctx.fill();
   
   recordPoints.forEach(line => {
     // 线的宽度
-    ctx.setLineWidth(line[0].width);
+    ctx.lineWidth = line[0].width;
     // 线的颜色
-    ctx.setStrokeStyle('blue');
+    ctx.strokeStyle = line[0].color;
     // 起始位置
     ctx.moveTo(line[0].x, line[0].y);
     // 这些样式就默认了
-    ctx.setLineCap('round');
-    ctx.setLineJoin('round');
+    ctx.lineCap = 'round';
+    ctx.lineJoin = 'round';
+
+    console.log(ctx.lineWidth);
 
     line.forEach((p, i) => {
       if (i && line[i+1]) {
@@ -67,3 +69,10 @@ export const drawBack = (_this) => {
 export const clearPoints = () => {
   recordPoints.length = 0;
 };
+
+export const clearDraw = (e, _this) => {
+  const ctx = wx.createCanvasContext('myCanvas');
+  const { x, y } = e.touches[0];
+  ctx.clearRect(x, y, 20, 20);
+  ctx.draw();
+}

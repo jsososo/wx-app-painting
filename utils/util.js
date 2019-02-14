@@ -51,7 +51,7 @@ function tapBtn(e, _this, pageType) {
     // 画笔宽度
     case 'width':
       if (pageType === 1) {
-        c.canvasHeight = (!_this.data.width) ? 130 + _this.data.w : 50
+        c.canvasHeight = (!_this.data.width) ? 130 + _this.data.w : 50;
       } else if (pageType === 2) {
         c.canvasHeightLen = (!_this.data.width) ? Math.min(_this.data.canvasHeight, _this.data.windowHeight - _this.data.w - 130) : 0;
       } else if (pageType === 3) {
@@ -68,6 +68,9 @@ function tapBtn(e, _this, pageType) {
     case 'color':
       if (pageType === 1) {
         c.canvasHeight = (!_this.data.color) ? 205 + _this.data.w : 50;
+        if (_this.data.pageType === 'whiteBoard') {
+          c.canvasHeight += 64;
+        }
       } else if (pageType === 2) {
         c.canvasHeightLen = (!_this.data.color) ? Math.min(_this.data.canvasHeight, _this.data.windowHeight - _this.data.w - 205) : 0;
       }
@@ -214,9 +217,18 @@ function _canvaseSaveToImg(_this) {
   })
 }
 
+function setEraser(_this) {
+  _this.setData({
+    eraser: !_this.data.eraser,
+    clear: false,
+    canvasHeight: 50
+  });
+}
+
 module.exports = {
   formatTime: formatTime,
   changeColor: changeColor,
   changeWidth: changeWidth,
   tapBtn: tapBtn,
+  setEraser: setEraser,
 }

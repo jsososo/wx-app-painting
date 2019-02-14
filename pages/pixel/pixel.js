@@ -7,24 +7,24 @@ Page({
      */
     data: {
         // 参数作用可以参考painting2
-        btnInfo: [
-            {
-                type: 'width',
-                background: 'url("http://ov8a2tdri.bkt.clouddn.com/wx-app/icon-1.png"); background-size: 30px 30px;'
-            },
-            {
-                type: 'color',
-                background: 'url("http://ov8a2tdri.bkt.clouddn.com/wx-app/icon-2.png") white no-repeat; background-size: 24px 24px;background-position: 3px 3px;'
-            },
-            {
-                type: 'clear',
-                background: 'url("http://ov8a2tdri.bkt.clouddn.com/wx-app/icon-4.png") white no-repeat; background-size: 20px 20px;background-position: 5px 5px;'
-            },
-            {
-                type: 'save',
-                background: 'url("http://ov8a2tdri.bkt.clouddn.com/wx-app/icon-6.png") white no-repeat; background-size: 20px 20px;background-position: 5px 5px;'
-            }
-        ],
+      btnInfo: [
+        {
+          type: 'width',
+          background: 'url("http://bmob-cdn-20716.b0.upaiyun.com/2018/10/29/b2caae93401a9be1809edfb314a91159.png") white no-repeat; background-size: 40rpx 40rpx;background-position: 10rpx 10rpx;'
+        },
+        {
+          type: 'color',
+          background: 'url("http://bmob-cdn-20716.b0.upaiyun.com/2018/10/29/a516340a402e93ea8025fe0eb6f2f080.png") white no-repeat; background-size: 40rpx 40rpx;background-position: 10rpx 10rpx;'
+        },
+        {
+          type: 'clear',
+          background: 'url("http://bmob-cdn-20716.b0.upaiyun.com/2018/10/29/466bf6bb400574cf805fdb2fd715caa1.png") white no-repeat; background-size: 40rpx 40rpx;background-position: 10rpx 10rpx;'
+        },
+        {
+          type: 'save',
+          background: 'url("http://bmob-cdn-20716.b0.upaiyun.com/2018/10/29/d2e31f7c40113bdd807256c5a4cb06ae.png") white no-repeat; background-size: 40rpx 40rpx;background-position: 10rpx 10rpx;'
+        }
+      ],
         width: false,
         color: false,
         clear: false,

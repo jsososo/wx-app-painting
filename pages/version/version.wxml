@@ -1,5 +1,11 @@
 <!--pages/version/version.wxml-->
 <view class="info-block">
+  <view class="version-no">v1.2.3</view>
+  <view class="version-info">
+    fix 折线明显问题
+  </view>
+</view>
+<view class="info-block">
   <view class="version-no">v1.2.2</view>
   <view class="version-info">
     新增荧光涂鸦

@@ -1,4 +1,5 @@
 import utils from "../../utils/util";
+import {recordPointsFun, startTouch} from "../../utils/paint";
 // painting-2.js
 Page({
 
@@ -11,25 +12,26 @@ Page({
     canvasHeight: 0, // canvas的完整高度
     canvasHeightLen: 0, // canvas的临时高度（用在操作栏影响画布高度时）
     windowHeight: 0, // 屏幕高度
-    prevPosition: [0, 0], // 手指触摸的所在位置
+    prevPosition: [0, 0], // 前一个移动所在位置
+    movePosition: [0, 0], // 当前移动位置
     background: '', // 背景图片，即导入的图片
 
     btnInfo: [
       {
         type: 'width',
-        background: 'url("http://ov8a2tdri.bkt.clouddn.com/wx-app/icon-1.png"); background-size: 30px 30px;'
+        background: 'url("http://bmob-cdn-20716.b0.upaiyun.com/2018/10/29/b2caae93401a9be1809edfb314a91159.png") white no-repeat; background-size: 20px 20px;background-position: 2px 2px;'
       },
       {
         type: 'color',
-        background: 'url("http://ov8a2tdri.bkt.clouddn.com/wx-app/icon-2.png") white no-repeat; background-size: 24px 24px;background-position: 3px 3px;'
+        background: 'url("http://bmob-cdn-20716.b0.upaiyun.com/2018/10/29/a516340a402e93ea8025fe0eb6f2f080.png") white no-repeat; background-size: 18px 18px;background-position: 3px 3px;'
       },
       {
         type: 'clear',
-        background: 'url("http://img0.imgtn.bdimg.com/it/u=1358545290,3102156418&fm=26&gp=0.jpg") white no-repeat; background-size: 20px 20px;background-position: 5px 5px;'
+        background: 'url("http://bmob-cdn-20716.b0.upaiyun.com/2018/10/29/466bf6bb400574cf805fdb2fd715caa1.png") white no-repeat; background-size: 18px 18px;background-position: 3px 3px;'
       },
       {
         type: 'save',
-        background: 'url("http://ov8a2tdri.bkt.clouddn.com/wx-app/icon-6.png") white no-repeat; background-size: 20px 20px;background-position: 5px 5px;'
+        background: 'url("http://bmob-cdn-20716.b0.upaiyun.com/2018/10/29/d2e31f7c40113bdd807256c5a4cb06ae.png") white no-repeat; background-size: 20px 20px;background-position: 2px 2px;'
       }
     ],
     width: false, // 是否开启宽度调整栏
@@ -115,34 +117,47 @@ Page({
   touchStart: function (e) {
     // 开始画图，隐藏所有的操作栏
     this.setData({
-      prevPosition: [e.touches[0].x, e.touches[0].y],
-      width: false,
       color: false,
-      canvasHeightLen: 0
-    })
+      width: false,
+      canvasHeightLen: 0,
+      prevPosition: [e.touches[0].x, e.touches[0].y],
+      movePosition: [e.touches[0].x, e.touches[0].y],
+    });
+    const { r, g, b } = this.data;
+    let color = `rgb(${r},${g},${b})`;
+    let width = this.data.w;
+    startTouch(e, color, width);
   },
 
   touchMove: function (e) {
-    // 触摸移动，绘制中。。。
-    let ctx = wx.createCanvasContext('myCanvas');
-
-    if (this.data.eraser) {
+    const { r, g, b, prevPosition, movePosition, eraser, w, } = this.data;
+    // 触摸，绘制中。。
+    const ctx = wx.createCanvasContext('myCanvas');
+    // 画笔的颜色
+    let color = `rgb(${r},${g},${b})`;
+    let width = w;
+    if (eraser) {
       ctx.clearRect(e.touches[0].x, e.touches[0].y, 30, 30);
       ctx.draw(true);
-    } else {
-      ctx.setStrokeStyle("rgb(" + this.data.r + ', ' + this.data.g + ', ' + this.data.b + ')');
-      ctx.setLineWidth(this.data.w);
-      ctx.setLineCap('round');
-      ctx.setLineJoin('round');
-      ctx.moveTo(this.data.prevPosition[0], this.data.prevPosition[1]);
-      ctx.lineTo(e.touches[0].x, e.touches[0].y);
-      ctx.stroke();
-      ctx.draw(true);
+      return;
     }
 
+    const [pX, pY, cX, cY] = [...prevPosition, e.touches[0].x, e.touches[0].y];
+
+    ctx.setLineWidth(width);
+    ctx.setStrokeStyle(color);
+
+    ctx.setLineCap('round');
+    ctx.setLineJoin('round');
+    ctx.moveTo(...movePosition);
+    ctx.quadraticCurveTo(pX, pY, (cX + pX) / 2, (cY + pY) / 2);
+    ctx.stroke();
+    ctx.draw(true);
+
     this.setData({
-      prevPosition: [e.touches[0].x, e.touches[0].y]
-    })
+      prevPosition: [cX, cY],
+      movePosition: [(cX + pX) / 2, (cY + pY) / 2]
+    });
   },
 
   clearCanvas: function () {

@@ -1,5 +1,5 @@
 import utils from "../../utils/util";
-import { recordPointsFun, startTouch, reDraw, drawBack, clearPoints } from '../../utils/paint.js';
+import { recordPointsFun, startTouch, reDraw, drawBack, clearPoints, clearDraw } from '../../utils/paint.js';
 // painting.js
 Page({
 
@@ -12,19 +12,19 @@ Page({
     btnInfo: [
       {
         type: 'width',
-        background: 'url("http://ov8a2tdri.bkt.clouddn.com/wx-app/icon-1.png"); background-size: 30px 30px;'
+        background: 'url("http://bmob-cdn-20716.b0.upaiyun.com/2018/10/29/b2caae93401a9be1809edfb314a91159.png") white no-repeat; background-size: 20px 20px;background-position: 2px 2px;'
       },
       {
         type: 'color',
-        background: 'url("http://ov8a2tdri.bkt.clouddn.com/wx-app/icon-2.png") white no-repeat; background-size: 24px 24px;background-position: 3px 3px;'
+        background: 'url("http://bmob-cdn-20716.b0.upaiyun.com/2018/10/29/a516340a402e93ea8025fe0eb6f2f080.png") white no-repeat; background-size: 18px 18px;background-position: 3px 3px;'
       },
       {
         type: 'clear',
-        background: 'url("http://img0.imgtn.bdimg.com/it/u=1358545290,3102156418&fm=26&gp=0.jpg") white no-repeat; background-size: 20px 20px;background-position: 5px 5px;'
+        background: 'url("http://bmob-cdn-20716.b0.upaiyun.com/2018/10/29/466bf6bb400574cf805fdb2fd715caa1.png") white no-repeat; background-size: 18px 18px;background-position: 3px 3px;'
       },
       {
         type: 'save',
-        background: 'url("http://ov8a2tdri.bkt.clouddn.com/wx-app/icon-6.png") white no-repeat; background-size: 20px 20px;background-position: 5px 5px;'
+        background: 'url("http://bmob-cdn-20716.b0.upaiyun.com/2018/10/29/d2e31f7c40113bdd807256c5a4cb06ae.png") white no-repeat; background-size: 20px 20px;background-position: 2px 2px;'
       }
     ],
     width: false,
@@ -40,6 +40,7 @@ Page({
     saving: false, // 是否保存中
     pageType: 'whiteBoard',
     bgColor: 'white',
+    showHighLight: false,
     movePosition: [-1, -1],
   },
 
@@ -82,29 +83,37 @@ Page({
     this.setData({
       color: false,
       width: false,
-      clear: false,
       canvasHeight: 50,
       prevPosition: [e.touches[0].x, e.touches[0].y],
       movePosition: [e.touches[0].x, e.touches[0].y],
     });
     const { r, g, b } = this.data;
-    startTouch(e, `rgb(${r},${g},${b})`, this.data.w);
+    let color = `rgb(${r},${g},${b})`;
+    let width = this.data.w;
+    startTouch(e, color, width);
   },
 
   touchMove: function (e) {
-    const { r, g, b, prevPosition, movePosition } = this.data;
+    const { r, g, b, prevPosition, movePosition, pageType, eraser, w, showHighLight } = this.data;
     // 触摸，绘制中。。
     const ctx = wx.createCanvasContext('myCanvas');
     // 画笔的颜色
-    const color = `rgb(${r},${g},${b})`;
-    // 荧光的颜色
-    let shadowColor = `rgba(${r},${g},${b},0.6)`;
+    let color = `rgb(${r},${g},${b})`;
+    let width = w;
+    if (eraser) {
+      color = {
+        whiteBoard: '#fff',
+        highlighter: '#000',
+      }[pageType];
+      ctx.setShadow(0, 0, 0, color);
+      width = 20;
+    }
 
     const [pX, pY, cX, cY] = [...prevPosition, e.touches[0].x, e.touches[0].y];
 
-    ctx.setLineWidth(this.data.w);
+    ctx.setLineWidth(width);
     ctx.setStrokeStyle(color);
-    if (this.data.pageType === 'highlighter') {
+    if ((pageType === 'highlighter' && !eraser) || (showHighLight && !eraser)) {
       ctx.setShadow(0, 0, 30, `rgba(${r},${g},${b},0.6)`);
     }
     ctx.setLineCap('round');
@@ -152,6 +161,14 @@ Page({
       clear: false,
       canvasHeight: 50
     })
+  },
+
+  setEraser() {
+    utils.setEraser(this);
+  },
+
+  changeHighLight() {
+    this.setData({ showHighLight: !this.data.showHighLight });
   },
 
   onShow() {
