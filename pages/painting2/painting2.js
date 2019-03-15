@@ -1,5 +1,5 @@
 import utils from "../../utils/util";
-import {recordPointsFun, startTouch} from "../../utils/paint";
+import {recordPointsFun, startTouch, drawBack} from "../../utils/paint";
 // painting-2.js
 Page({
 
@@ -100,6 +100,9 @@ Page({
               height = that.data.windowHeight - 50;
               width = height / res.height * res.width;
             }
+            const ctx = wx.createCanvasContext('myCanvas');
+            ctx.drawImage(res.path, 0, 0, width, height);
+            ctx.draw();
             that.setData({
               canvasHeight: height,
               canvasWidth: width,
@@ -143,16 +146,18 @@ Page({
     }
 
     const [pX, pY, cX, cY] = [...prevPosition, e.touches[0].x, e.touches[0].y];
-
+    const drawPosition = [pX, pY, (cX + pX) / 2, (cY + pY) / 2];
     ctx.setLineWidth(width);
     ctx.setStrokeStyle(color);
 
     ctx.setLineCap('round');
     ctx.setLineJoin('round');
     ctx.moveTo(...movePosition);
-    ctx.quadraticCurveTo(pX, pY, (cX + pX) / 2, (cY + pY) / 2);
+    ctx.quadraticCurveTo(...drawPosition);
     ctx.stroke();
     ctx.draw(true);
+
+    recordPointsFun(movePosition, drawPosition)
 
     this.setData({
       prevPosition: [cX, cY],
@@ -176,6 +181,13 @@ Page({
       clear: false,
       canvasHeightLen: 0
     })
+  },
+
+  drawBack() {
+    const ctx = wx.createCanvasContext('myCanvas');
+    ctx.drawImage(this.data.background, 0, 0, this.data.canvasWidth, this.data.canvasHeight);
+    ctx.draw();
+    drawBack(this);
   },
 
   changeColor: function (e) {

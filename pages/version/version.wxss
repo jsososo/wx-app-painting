@@ -7,12 +7,12 @@
 .version-no {
   color: #333;
   display: inline-block;
-  width: 80rpx;
+  width: 150rpx;
   vertical-align: top;
 }
 
 .version-info {
   display: inline-block;
-  width: 600rpx;
+  width: 490rpx;
   color: #666;
 }

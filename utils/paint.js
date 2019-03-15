@@ -13,46 +13,38 @@ export const startTouch = (e, color, width) => {
 };
 
 // 记录一条线内的每个点
-export const recordPointsFun = (e, _this) => {
+export const recordPointsFun = (move, draw) => {
   const l = recordPoints.length;
-  recordPoints[l-1].push({
-    x: e.touches[0].x,
-    y: e.touches[0].y,
-  });
-  // reDraw(_this)
+  recordPoints[l-1].push({ move, draw });
 };
 
 // 绘制过程
 export const reDraw = (_this) => {
   const ctx = wx.createCanvasContext('myCanvas');
-  ctx.rect(-100, -100, 10000, 10000);
-  ctx.setFillStyle('white');
-  ctx.fill();
-  
+
   recordPoints.forEach(line => {
+    const { width, color, x, y } = line[0];
     // 线的宽度
-    ctx.lineWidth = line[0].width;
+    ctx.setLineWidth(width);
     // 线的颜色
-    ctx.strokeStyle = line[0].color;
+    ctx.setStrokeStyle(color);
     // 起始位置
-    ctx.moveTo(line[0].x, line[0].y);
+    ctx.moveTo(x, y);
     // 这些样式就默认了
-    ctx.lineCap = 'round';
-    ctx.lineJoin = 'round';
+    ctx.setLineCap('round');
+    ctx.setLineJoin('round');
 
-    console.log(ctx.lineWidth);
-
+    console.log(line);
     line.forEach((p, i) => {
-      if (i && line[i+1]) {
-        // 让曲线更加平滑
-        ctx.quadraticCurveTo(p.x, p.y, (p.x + line[i+1].x) / 2, (p.y + line[i+1].y) / 2);
+      if (i === 0) {
+        return;
       }
+      ctx.moveTo(...p.move);
+      ctx.quadraticCurveTo(...p.draw);
+      ctx.stroke();
+      ctx.draw(true);
     });
-    ctx.imageSmoothingEnabled = true;
-    ctx.stroke();
   });
-
-  ctx.draw();
 
   _this.setData({
     prevPosition: [-1, -1]

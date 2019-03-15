@@ -146,7 +146,7 @@ function saveImg(_this, pageType) {
       ...c,
     })
 
-    if (pageType === 2) {
+    if (pageType === -1) {
       /*
       * 对于涂鸦照片，一共分为四步：
       * 1、将画的内容先保存出来

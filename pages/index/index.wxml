@@ -14,7 +14,7 @@
   </navigator>
   <view class='author'>
     <view>designed by soso
-      <navigator url="../version/version" style="text-decoration: underline; display: inline">(version 1.2.3)</navigator>
+      <navigator url="../version/version" style="text-decoration: underline; display: inline">(version 1.2.4)</navigator>
     </view>
     <view>contact: jsososo@outlook.com</view>
   </view>
