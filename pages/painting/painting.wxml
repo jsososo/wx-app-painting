@@ -19,15 +19,15 @@
 </view>
 <view class="choose-box-flex" wx:if="{{clear}}">
   <!--<view class="choose-item" bindtap="tapDraBack">-->
-    <!--<view class="choose-img" style='background: url("http://bmob-cdn-20716.b0.upaiyun.com/2018/10/29/997c2bf5404e5abc809b42fe6bb902f9.png") white no-repeat; background-size: 52rpx 52rpx;background-position: 4rpx 4rpx; border: {{eraser ? "4rpx solid #888" : "4rpx solid transparent"}}'></view>-->
+    <!--<view class="choose-img" style='background: url("http://static.jsososo.com/bmob-cdn-20716.b0.upaiyun.com/2018/10/29/997c2bf5404e5abc809b42fe6bb902f9.png") white no-repeat; background-size: 52rpx 52rpx;background-position: 4rpx 4rpx; border: {{eraser ? "4rpx solid #888" : "4rpx solid transparent"}}'></view>-->
     <!--<view>撤回</view>-->
   <!--</view>-->
   <view class="choose-item" bindtap="setEraser">
-    <view class="choose-img" style='background: url("http://bmob-cdn-20716.b0.upaiyun.com/2018/10/29/997c2bf5404e5abc809b42fe6bb902f9.png") white no-repeat; background-size: 52rpx 52rpx;background-position: 4rpx 4rpx; border: {{eraser ? "4rpx solid #888" : "4rpx solid transparent"}}'></view>
+    <view class="choose-img" style='background: url("http://static.jsososo.com/bmob-cdn-20716.b0.upaiyun.com/2018/10/29/997c2bf5404e5abc809b42fe6bb902f9.png") white no-repeat; background-size: 52rpx 52rpx;background-position: 4rpx 4rpx; border: {{eraser ? "4rpx solid #888" : "4rpx solid transparent"}}'></view>
     <view>橡皮擦</view>
   </view>
   <view class="choose-item" bindtap="clearCanvas">
-    <view class="choose-img" style='background: url("http://bmob-cdn-20716.b0.upaiyun.com/2018/10/29/33f80e334020a90b80e8cd8423cb8fbe.png") white no-repeat; background-size: 52rpx 52rpx;background-position: 4rpx 4rpx;'></view>
+    <view class="choose-img" style='background: url("http://static.jsososo.com/bmob-cdn-20716.b0.upaiyun.com/2018/10/29/33f80e334020a90b80e8cd8423cb8fbe.png") white no-repeat; background-size: 52rpx 52rpx;background-position: 4rpx 4rpx;'></view>
     <view>清空</view>
   </view>
 </view>

@@ -3,7 +3,7 @@
 涂鸦小程序，可以在白板上画画，也可以选择涂鸦照片。可以自由修改画笔宽度、颜色。画画代码位于painting、涂鸦照片代码位于painting2
 
 可以通过搜索 soso涂鸦 或者扫面下面的二维码体验效果。
-![soso涂鸦](http://bmob-cdn-20716.b0.upaiyun.com/2019/02/22/09c84a5840cd995880c2505920574554.png)
+![soso涂鸦](http://static.jsososo.com/bmob-cdn-20716.b0.upaiyun.com/2019/02/22/09c84a5840cd995880c2505920574554.png)
 
 由于考虑到canvas在小程序中层级最高，因此采用动态调整高度的方法显示底部调整栏。
 
